@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grocery Delivery - The Complete Package</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2A0944 0%, #3B185F 100%);
+            padding: 1rem;
+            color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            background-color: #FFA500;
+            padding: 0.8rem;
+            border-radius: 15px;
+            margin-right: 1rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 2rem;
+        }
+
+        .grocery-main {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .search-filter {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .search-bar {
+            flex: 1;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 1rem 3rem;
+            border: 2px solid #FF5722;
+            border-radius: 25px;
+            font-size: 1rem;
+        }
+
+        .search-bar i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #FF5722;
+        }
+
+        .categories {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: 0.8rem 1.5rem;
+            background: #fff;
+            border: 2px solid #FF5722;
+            border-radius: 25px;
+            color: #FF5722;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category-btn.active,
+        .category-btn:hover {
+            background: #FF5722;
+            color: white;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+        }
+
+        .product-title {
+            color: #333;
+            margin-bottom: 0.5rem;
+            height: 50px;
+            overflow: hidden;
+        }
+
+        .product-price {
+            color: #FF5722;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .quantity-btn {
+            padding: 0.3rem 0.8rem;
+            border: 1px solid #ddd;
+            background: #f8f8f8;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 0.8rem;
+            background: #FF5722;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background: #E64A19;
+        }
+
+        .cart-summary {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            height: fit-content;
+            position: sticky;
+            top: 2rem;
+        }
+
+        .cart-items {
+            margin: 1rem 0;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1rem;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        footer {
+            background: #2A0944;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .cart-summary {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <div class="logo-icon">🛒</div>
+            <span>Grocery Delivery</span>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="grocery-main">
+            <!-- Search and filter section remains same -->
+            
+            <div class="products-grid">
+                <!-- Existing Products -->
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/200x200" alt="Apple" class="product-image">
+                    <h3 class="product-title">Fresh Red Apples (1kg)</h3>
+                    <p class="product-price">₹199</p>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn">-</button>
+                        <span>1</span>
+                        <button class="quantity-btn">+</button>
+                    </div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/200x200" alt="Milk" class="product-image">
+                    <h3 class="product-title">Fresh Cow Milk (1L)</h3>
+                    <p class="product-price">₹65</p>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn">-</button>
+                        <span>1</span>
+                        <button class="quantity-btn">+</button>
+                    </div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/200x200" alt="Bread" class="product-image">
+                    <h3 class="product-title">Whole Wheat Bread (500g)</h3>
+                    <p class="product-price">₹45</p>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn">-</button>
+                        <span>1</span>
+                        <button class="quantity-btn">+</button>
+                    </div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+
+                <!-- New Products Added -->
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/200x200" alt="Bananas" class="product-image">
+                    <h3 class="product-title">Fresh Bananas (Dozen)</h3>
+                    <p class="product-price">₹55</p>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn">-</button>
+                        <span>1</span>
+                        <button class="quantity-btn">+</button>
+                    </div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/200x200" alt="Eggs" class="product-image">
+                    <h3 class="product-title">Farm Fresh Eggs (12 pieces)</h3>
+                    <p class="product-price">₹90</p>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn">-</button>
+                        <span>1</span>
+                        <button class="quantity-btn">+</button>
+                    </div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/200x200" alt="Rice" class="product-image">
+                    <h3 class="product-title">Basmati Rice (5kg)</h3>
+                    <p class="product-price">₹450</p>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn">-</button>
+                        <span>1</span>
+                        <button class="quantity-btn">+</button>
+                    </div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/200x200" alt="Potato" class="product-image">
+                    <h3 class="product-title">Fresh Potatoes (2kg)</h3>
+                    <p class="product-price">₹60</p>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn">-</button>
+                        <span>1</span>
+                        <button class="quantity-btn">+</button>
+                    </div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/200x200" alt="Tomato" class="product-image">
+                    <h3 class="product-title">Fresh Tomatoes (1kg)</h3>
+                    <p class="product-price">₹40</p>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn">-</button>
+                        <span>1</span>
+                        <button class="quantity-btn">+</button>
+                    </div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/200x200" alt="Chicken" class="product-image">
+                    <h3 class="product-title">Fresh Chicken (1kg)</h3>
+                    <p class="product-price">₹220</p>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn">-</button>
+                        <span>1</span>
+                        <button class="quantity-btn">+</button>
+                    </div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/200x200" alt="Cookies" class="product-image">
+                    <h3 class="product-title">Chocolate Cookies (200g)</h3>
+                    <p class="product-price">₹75</p>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn">-</button>
+                        <span>1</span>
+                        <button class="quantity-btn">+</button>
+                    </div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/200x200" alt="Cheese" class="product-image">
+                    <h3 class="product-title">Cheddar Cheese (200g)</h3>
+                    <p class="product-price">₹180</p>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn">-</button>
+                        <span>1</span>
+                        <button class="quantity-btn">+</button>
+                    </div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/200x200" alt="Juice" class="product-image">
+                    <h3 class="product-title">Orange Juice (1L)</h3>
+                    <p class="product-price">₹120</p>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn">-</button>
+                        <span>1</span>
+                        <button class="quantity-btn">+</button>
+                    </div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/200x200" alt="Pasta" class="product-image">
+                    <h3 class="product-title">Whole Wheat Pasta (500g)</h3>
+                    <p class="product-price">₹85</p>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn">-</button>
+                        <span>1</span>
+                        <button class="quantity-btn">+</button>
+                    </div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/200x200" alt="Yogurt" class="product-image">
+                    <h3 class="product-title">Greek Yogurt (500g)</h3>
+                    <p class="product-price">₹110</p>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn">-</button>
+                        <span>1</span>
+                        <button class="quantity-btn">+</button>
+                    </div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/200x200" alt="Chocolate" class="product-image">
+                    <h3 class="product-title">Dark Chocolate (100g)</h3>
+                    <p class="product-price">₹150</p>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn">-</button>
+                        <span>1</span>
+                        <button class="quantity-btn">+</button>
+                    </div>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="cart-summary">
+            <h2>Shopping Cart (<span id="cart-count">0</span>)</h2>
+            <div class="cart-items">
+                <!-- Cart items will be dynamically added here -->
+            </div>
+            <div class="cart-total">
+                <h3>Total: ₹<span id="total-amount">0</span></h3>
+            </div>
+            <button class="checkout-btn">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 The Complete Package. All rights reserved.</p>
+        <p>Delivery within 2 hours | Freshness guaranteed</p>
+    </footer>
+
+    <script>
+        // Updated JavaScript to handle empty initial cart
+        let cartItems = [];
+        let totalAmount = 0;
+
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', () => {
+                const productCard = button.closest('.product-card');
+                const productName = productCard.querySelector('.product-title').innerText;
+                const productPrice = parseFloat(productCard.querySelector('.product-price').innerText.replace('₹',''));
+                const quantity = parseInt(productCard.querySelector('.quantity-controls span').innerText);
+
+                // Check if item already exists in cart
+                const existingItem = cartItems.find(item => item.name === productName);
+                if(existingItem) {
+                    existingItem.quantity += quantity;
+                } else {
+                    cartItems.push({
+                        name: productName,
+                        price: productPrice,
+                        quantity: quantity
+                    });
+                }
+
+                updateCartDisplay();
+            });
+        });
+
+        function updateCartDisplay() {
+            const cartItemsContainer = document.querySelector('.cart-items');
+            const cartTotal = document.querySelector('#total-amount');
+            const cartCount = document.querySelector('#cart-count');
+            
+            // Clear current items
+            cartItemsContainer.innerHTML = '';
+            
+            // Update items and total
+            totalAmount = 0;
+            cartItems.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                totalAmount += itemTotal;
+                
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <span>${item.name} (x${item.quantity})</span>
+                    <span>₹${itemTotal}</span>
+                `;
+                cartItemsContainer.appendChild(cartItem);
+            });
+
+            // Update totals
+            cartTotal.innerText = totalAmount;
+            cartCount.innerText = cartItems.length;
+        }
+
+        // Quantity controls remain same
+    </script>
+</body>
+</html>

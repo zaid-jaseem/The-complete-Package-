@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taxi Service - The Complete Package</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2A0944 0%, #3B185F 100%);
+            padding: 1rem;
+            color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            background-color: #FFA500;
+            padding: 0.8rem;
+            border-radius: 15px;
+            margin-right: 1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .taxi-booking {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .booking-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .form-title {
+            color: #3B9AE1;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #666;
+            font-weight: bold;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .input-field i {
+            color: #3B9AE1;
+        }
+
+        .ride-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .ride-card {
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .ride-card:hover {
+            border-color: #3B9AE1;
+        }
+
+        .ride-card.selected {
+            border-color: #3B9AE1;
+            background-color: #f0f8ff;
+        }
+
+        .fare-estimate {
+            background: #f0f8ff;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+        }
+
+        #map {
+            height: 500px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .btn {
+            background: #3B9AE1;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #2A7ABF;
+        }
+
+        .recent-rides {
+            margin-top: 2rem;
+        }
+
+        .ride-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        footer {
+            background: #2A0944;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .taxi-booking {
+                grid-template-columns: 1fr;
+            }
+            
+            #map {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <div class="logo-icon">🚕</div>
+            <span>Taxi Service</span>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="taxi-booking">
+            <div class="booking-form">
+                <h2 class="form-title">Book a Ride</h2>
+                
+                <div class="input-group">
+                    <label>Pickup Location</label>
+                    <div class="input-field">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <input type="text" placeholder="Enter pickup location">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Drop-off Location</label>
+                    <div class="input-field">
+                        <i class="fas fa-flag-checkered"></i>
+                        <input type="text" placeholder="Enter destination">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Ride Type</label>
+                    <div class="ride-types">
+                        <div class="ride-card" onclick="selectRide(this)">
+                            <i class="fas fa-car"></i>
+                            <h3>Standard</h3>
+                            <p>₹12/km</p>
+                        </div>
+                        <div class="ride-card" onclick="selectRide(this)">
+                            <i class="fas fa-star"></i>
+                            <h3>Premium</h3>
+                            <p>₹18/km</p>
+                        </div>
+                        <div class="ride-card" onclick="selectRide(this)">
+                            <i class="fas fa-suv"></i>
+                            <h3>SUV</h3>
+                            <p>₹25/km</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fare-estimate">
+                    <h3>Fare Estimate</h3>
+                    <p>Approximate fare: <span id="fare">₹0</span></p>
+                </div>
+
+                <button class="btn" onclick="bookRide()">Book Now</button>
+            </div>
+
+            <div id="map"></div>
+        </div>
+
+        <div class="recent-rides">
+            <h2>Recent Rides</h2>
+            <div class="ride-item">
+                <div>
+                    <h3>Airport to City Center</h3>
+                    <p>15 km • Standard • ₹180</p>
+                </div>
+                <span>Completed</span>
+            </div>
+            <div class="ride-item">
+                <div>
+                    <h3>Office to Home</h3>
+                    <p>8 km • Premium • ₹144</p>
+                </div>
+                <span>Completed</span>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 The Complete Package. All rights reserved.</p>
+        <p>24/7 Support: 1-800-TAXI-HELP</p>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        // Initialize map
+        const map = L.map('map').setView([51.505, -0.09], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+        // Ride selection
+        function selectRide(element) {
+            document.querySelectorAll('.ride-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            calculateFare();
+        }
+
+        // Fare calculation
+        function calculateFare() {
+            const selectedRide = document.querySelector('.ride-card.selected');
+            if(selectedRide) {
+                const pricePerKm = parseInt(selectedRide.querySelector('p').innerText.replace('₹','').replace('/km',''));
+                const distance = 10; // Sample distance (would normally come from map)
+                document.getElementById('fare').innerText = `₹${pricePerKm * distance}`;
+            }
+        }
+
+        // Book ride function
+        function bookRide() {
+            alert('Ride booked successfully! Driver will arrive shortly.');
+        }
+
+        // Initialize default fare
+        calculateFare();
+    </script>
+</body>
+</html>

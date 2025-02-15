@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Services - The Complete Package</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background: linear-gradient(135deg, #8BC34A 0%, #689F38 100%);
+            padding: 1rem;
+            color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            background-color: #FFC107;
+            padding: 0.8rem;
+            border-radius: 15px;
+            margin-right: 1rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .services-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: 0.8rem 1.5rem;
+            background: white;
+            border: 2px solid #8BC34A;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #689F38;
+            transition: all 0.3s ease;
+        }
+
+        .category-btn.active,
+        .category-btn:hover {
+            background: #8BC34A;
+            color: white;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: #689F38;
+            margin-bottom: 1rem;
+        }
+
+        .service-title {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-price {
+            color: #8BC34A;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-description {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .book-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background: #8BC34A;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .book-btn:hover {
+            background: #689F38;
+        }
+
+        footer {
+            background: #8BC34A;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <div class="logo-icon">🏠</div>
+            <span>Home Services</span>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="services-header">
+            <h1>Professional Home Services</h1>
+            <p>Book trusted professionals for all your home needs</p>
+        </div>
+
+        <div class="categories">
+            <button class="category-btn active">All Services</button>
+            <button class="category-btn">Cleaning</button>
+            <button class="category-btn">Repairs</button>
+            <button class="category-btn">Installation</button>
+        </div>
+
+        <div class="services-grid">
+            <!-- Service 1 -->
+            <div class="service-card">
+                <i class="fas fa-tools service-icon"></i>
+                <h3 class="service-title">Plumbing Services</h3>
+                <p class="service-price">Starting at ₹499</p>
+                <p class="service-description">Fix leaks, pipe installation, and bathroom fittings</p>
+                <button class="book-btn">Book Now</button>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="service-card">
+                <i class="fas fa-bolt service-icon"></i>
+                <h3 class="service-title">Electrical Repairs</h3>
+                <p class="service-price">Starting at ₹699</p>
+                <p class="service-description">Wiring, switch repairs, and fixture installation</p>
+                <button class="book-btn">Book Now</button>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="service-card">
+                <i class="fas fa-broom service-icon"></i>
+                <h3 class="service-title">Deep Cleaning</h3>
+                <p class="service-price">Starting at ₹1,299</p>
+                <p class="service-description">Full home cleaning with eco-friendly products</p>
+                <button class="book-btn">Book Now</button>
+            </div>
+
+            <!-- Service 4 -->
+            <div class="service-card">
+                <i class="fas fa-paint-roller service-icon"></i>
+                <h3 class="service-title">Painting Services</h3>
+                <p class="service-price">Starting at ₹2,999</p>
+                <p class="service-description">Interior/exterior painting with premium paints</p>
+                <button class="book-btn">Book Now</button>
+            </div>
+
+            <!-- Service 5 -->
+            <div class="service-card">
+                <i class="fas fa-couch service-icon"></i>
+                <h3 class="service-title">Furniture Assembly</h3>
+                <p class="service-price">Starting at ₹399</p>
+                <p class="service-description">Professional furniture setup and installation</p>
+                <button class="book-btn">Book Now</button>
+            </div>
+
+            <!-- Service 6 -->
+            <div class="service-card">
+                <i class="fas fa-fan service-icon"></i>
+                <h3 class="service-title">AC Repair</h3>
+                <p class="service-price">Starting at ₹899</p>
+                <p class="service-description">Servicing, gas refill, and installation</p>
+                <button class="book-btn">Book Now</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 The Complete Package. All rights reserved.</p>
+        <p>Quality Assured Services | Trained Professionals | 24/7 Support</p>
+    </footer>
+
+    <script>
+        // Category Filtering
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                // Add filtering logic here
+            });
+        });
+
+        // Booking Functionality
+        document.querySelectorAll('.book-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const serviceTitle = button.closest('.service-card').querySelector('.service-title').innerText;
+                alert(`Booking request for ${serviceTitle} received! Our executive will contact you shortly.`);
+            });
+        });
+    </script>
+</body>
+</html>

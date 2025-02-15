@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion - The Complete Package</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background: linear-gradient(135deg, #E91E63 0%, #C2185B 100%);
+            padding: 1rem;
+            color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            background-color: #FFC107;
+            padding: 0.8rem;
+            border-radius: 15px;
+            margin-right: 1rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .fashion-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: 0.8rem 1.5rem;
+            background: white;
+            border: 2px solid #E91E63;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #E91E63;
+            transition: all 0.3s ease;
+        }
+
+        .category-btn.active,
+        .category-btn:hover {
+            background: #E91E63;
+            color: white;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: #FFC107;
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: bold;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+        }
+
+        .product-details {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            color: #E91E63;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            color: #333;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-rating {
+            color: #FFC107;
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 0.8rem;
+            background: #E91E63;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .add-to-cart:hover {
+            background: #C2185B;
+        }
+
+        footer {
+            background: #E91E63;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <div class="logo-icon">👗</div>
+            <span>Fashion Hub</span>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="fashion-header">
+            <h1>New Arrivals</h1>
+            <p>Discover the latest fashion trends</p>
+        </div>
+
+        <div class="categories">
+            <button class="category-btn active">All</button>
+            <button class="category-btn">Women</button>
+            <button class="category-btn">Men</button>
+            <button class="category-btn">Kids</button>
+            <button class="category-btn">Accessories</button>
+        </div>
+
+        <div class="products-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <span class="product-badge">New</span>
+                <img src="https://via.placeholder.com/350x450" alt="Designer Dress" class="product-image">
+                <div class="product-details">
+                    <h3 class="product-title">Silk Evening Gown</h3>
+                    <div class="product-rating">
+                        ⭐⭐⭐⭐☆ (4.2)
+                    </div>
+                    <p class="product-price">₹5,999</p>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card">
+                <span class="product-badge">Sale</span>
+                <img src="https://via.placeholder.com/350x450" alt="Men's Suit" class="product-image">
+                <div class="product-details">
+                    <h3 class="product-title">Premium Wool Suit</h3>
+                    <div class="product-rating">
+                        ⭐⭐⭐⭐⭐ (4.8)
+                    </div>
+                    <p class="product-price">₹12,999 <span style="text-decoration: line-through; color: #999; margin-left: 0.5rem;">₹15,999</span></p>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/350x450" alt="Kids Wear" class="product-image">
+                <div class="product-details">
+                    <h3 class="product-title">Kids Party Dress</h3>
+                    <div class="product-rating">
+                        ⭐⭐⭐☆ (3.5)
+                    </div>
+                    <p class="product-price">₹1,299</p>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/350x450" alt="Accessories" class="product-image">
+                <div class="product-details">
+                    <h3 class="product-title">Designer Handbag</h3>
+                    <div class="product-rating">
+                        ⭐⭐⭐⭐☆ (4.0)
+                    </div>
+                    <p class="product-price">₹3,499</p>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 The Complete Package. All rights reserved.</p>
+        <p>Free Shipping | 30-Day Returns | Premium Quality</p>
+    </footer>
+
+    <script>
+        // Add to Cart Functionality
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', () => {
+                const productCard = button.closest('.product-card');
+                const productName = productCard.querySelector('.product-title').innerText;
+                const productPrice = productCard.querySelector('.product-price').innerText;
+                
+                alert(`Added to Cart:\n${productName}\n${productPrice}`);
+            });
+        });
+
+        // Category Filtering
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                // Add actual filtering logic here
+            });
+        });
+    </script>
+</body>
+</html>

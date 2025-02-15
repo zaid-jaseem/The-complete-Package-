@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharmacy - The Complete Package</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2A0944 0%, #3B185F 100%);
+            padding: 1rem;
+            color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            background-color: #FFA500;
+            padding: 0.8rem;
+            border-radius: 15px;
+            margin-right: 1rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+        }
+
+        .pharmacy-sidebar {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            height: fit-content;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .search-filter {
+            margin-bottom: 2rem;
+        }
+
+        .search-bar {
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 1rem 3rem;
+            border: 2px solid #00ACC1;
+            border-radius: 25px;
+            font-size: 1rem;
+        }
+
+        .search-bar i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #00ACC1;
+        }
+
+        .categories {
+            margin: 2rem 0;
+        }
+
+        .category-btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            background: white;
+            border: 2px solid #00ACC1;
+            border-radius: 10px;
+            color: #00ACC1;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category-btn.active,
+        .category-btn:hover {
+            background: #00ACC1;
+            color: white;
+        }
+
+        .prescription-upload {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .upload-btn {
+            background: #00ACC1;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+        }
+
+        .product-title {
+            color: #333;
+            margin-bottom: 0.5rem;
+            min-height: 60px;
+        }
+
+        .product-price {
+            color: #00ACC1;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 0.8rem;
+            background: #00ACC1;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background: #0097A7;
+        }
+
+        .health-tips {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #E3F2FD;
+            border-radius: 15px;
+        }
+
+        footer {
+            background: #2A0944;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .emergency-contact {
+            background: #FFEBEE;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <div class="logo-icon">🏥</div>
+            <span>Pharmacy & Health</span>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="pharmacy-sidebar">
+            <div class="search-filter">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search medicines...">
+                </div>
+            </div>
+
+            <div class="categories">
+                <button class="category-btn active">All Medicines</button>
+                <button class="category-btn">Prescription Drugs</button>
+                <button class="category-btn">Wellness</button>
+                <button class="category-btn">Vitamins</button>
+                <button class="category-btn">Personal Care</button>
+            </div>
+
+            <div class="prescription-upload">
+                <input type="file" id="prescription" hidden>
+                <button class="upload-btn" onclick="document.getElementById('prescription').click()">
+                    <i class="fas fa-upload"></i> Upload Prescription
+                </button>
+            </div>
+
+            <div class="health-tips">
+                <h3>Health Tips</h3>
+                <p>• Store medicines in cool, dry place</p>
+                <p>• Check expiry dates regularly</p>
+                <p>• Consult doctor before use</p>
+            </div>
+
+            <div class="emergency-contact">
+                <h3>Emergency Contact</h3>
+                <p>24/7 Pharmacist: 1-800-HELP-NOW</p>
+            </div>
+        </div>
+
+        <div class="products-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/200x200" alt="Medicine" class="product-image">
+                <h3 class="product-title">Paracetamol 500mg (10 tablets)</h3>
+                <p class="product-price">₹45</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/200x200" alt="Medicine" class="product-image">
+                <h3 class="product-title">Vitamin C 1000mg (60 capsules)</h3>
+                <p class="product-price">₹299</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/200x200" alt="Medicine" class="product-image">
+                <h3 class="product-title">Antiseptic Cream 30g</h3>
+                <p class="product-price">₹85</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/200x200" alt="Medicine" class="product-image">
+                <h3 class="product-title">Digestive Enzymes (60 tablets)</h3>
+                <p class="product-price">₹350</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/200x200" alt="Medicine" class="product-image">
+                <h3 class="product-title">Blood Pressure Monitor</h3>
+                <p class="product-price">₹1,299</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/200x200" alt="Medicine" class="product-image">
+                <h3 class="product-title">Multivitamin Syrup 200ml</h3>
+                <p class="product-price">₹175</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <!-- Product 7 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/200x200" alt="Medicine" class="product-image">
+                <h3 class="product-title">Hand Sanitizer 500ml</h3>
+                <p class="product-price">₹120</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+
+            <!-- Product 8 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/200x200" alt="Medicine" class="product-image">
+                <h3 class="product-title">Diabetes Testing Strips (50 count)</h3>
+                <p class="product-price">₹899</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 The Complete Package. All rights reserved.</p>
+        <p>24/7 Delivery | Licensed Pharmacists | Genuine Medicines</p>
+    </footer>
+
+    <script>
+        // Cart functionality
+        let cartItems = [];
+
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', () => {
+                const productCard = button.closest('.product-card');
+                const productName = productCard.querySelector('.product-title').innerText;
+                const productPrice = parseFloat(productCard.querySelector('.product-price').innerText.replace('₹','').replace(',',''));
+
+                // Check if item exists in cart
+                const existingItem = cartItems.find(item => item.name === productName);
+                if(existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cartItems.push({
+                        name: productName,
+                        price: productPrice,
+                        quantity: 1
+                    });
+                }
+
+                showAddedToCart(productName);
+            });
+        });
+
+        function showAddedToCart(productName) {
+            alert(`${productName} added to cart!`);
+            // For full implementation, connect to shared cart system
+        }
+    </script>
+</body>
+</html>

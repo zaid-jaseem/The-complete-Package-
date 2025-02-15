@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courier Services - The Complete Package</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background: linear-gradient(135deg, #795548 0%, #5D4037 100%);
+            padding: 1rem;
+            color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            background-color: #FFC107;
+            padding: 0.8rem;
+            border-radius: 15px;
+            margin-right: 1rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .courier-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .form-title {
+            color: #795548;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #666;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #795548;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+
+        .package-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .track-btn {
+            width: 100%;
+            padding: 1rem;
+            background: #795548;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .track-btn:hover {
+            background: #5D4037;
+        }
+
+        .tracking-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .tracking-status {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #FFF3E0;
+            border-radius: 10px;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-left: 4px solid #795548;
+        }
+
+        .status-item.active {
+            background: #FFECB3;
+        }
+
+        .recent-shipments {
+            grid-column: 1 / -1;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            margin-top: 2rem;
+        }
+
+        .shipment-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        .shipment-table th,
+        .shipment-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        footer {
+            background: #795548;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <div class="logo-icon">📦</div>
+            <span>Courier Services</span>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="courier-form">
+            <h2 class="form-title">Schedule a Pickup</h2>
+            <form id="courierForm">
+                <div class="form-group">
+                    <label>Pickup Address</label>
+                    <textarea rows="3" placeholder="Enter full pickup address"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Delivery Address</label>
+                    <textarea rows="3" placeholder="Enter full delivery address"></textarea>
+                </div>
+
+                <div class="package-details">
+                    <div class="form-group">
+                        <label>Package Type</label>
+                        <select>
+                            <option>Document</option>
+                            <option>Parcel</option>
+                            <option>Fragile</option>
+                            <option>Oversized</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Weight (kg)</label>
+                        <input type="number" step="0.1" placeholder="Enter weight">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Service Type</label>
+                    <select>
+                        <option>Standard (3-5 days)</option>
+                        <option>Express (24 hours)</option>
+                        <option>Same Day Delivery</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="track-btn">Schedule Pickup</button>
+            </form>
+        </div>
+
+        <div class="tracking-section">
+            <h2 class="form-title">Track Shipment</h2>
+            <div class="form-group">
+                <input type="text" placeholder="Enter tracking number">
+            </div>
+            <button class="track-btn">Track Package</button>
+
+            <div class="tracking-status">
+                <div class="status-item active">
+                    <i class="fas fa-check-circle" style="margin-right: 1rem; color: #795548;"></i>
+                    Pickup Scheduled - Nov 15, 10:00 AM
+                </div>
+                <div class="status-item">
+                    <i class="fas fa-box" style="margin-right: 1rem; color: #795548;"></i>
+                    In Transit - Mumbai Hub
+                </div>
+                <div class="status-item">
+                    <i class="fas fa-truck" style="margin-right: 1rem; color: #795548;"></i>
+                    Out for Delivery
+                </div>
+            </div>
+        </div>
+
+        <div class="recent-shipments">
+            <h2 class="form-title">Recent Shipments</h2>
+            <table class="shipment-table">
+                <thead>
+                    <tr>
+                        <th>Tracking ID</th>
+                        <th>Status</th>
+                        <th>Destination</th>
+                        <th>Est. Delivery</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#CP123456</td>
+                        <td>In Transit</td>
+                        <td>New Delhi</td>
+                        <td>Nov 18, 2023</td>
+                    </tr>
+                    <tr>
+                        <td>#CP123457</td>
+                        <td>Delivered</td>
+                        <td>Mumbai</td>
+                        <td>Nov 15, 2023</td>
+                    </tr>
+                    <tr>
+                        <td>#CP123458</td>
+                        <td>Processing</td>
+                        <td>Bangalore</td>
+                        <td>Nov 20, 2023</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 The Complete Package. All rights reserved.</p>
+        <p>24/7 Customer Support | Real-Time Tracking | Secure Handling</p>
+    </footer>
+
+    <script>
+        // Form Submission
+        document.getElementById('courierForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Pickup scheduled successfully! Our executive will contact you shortly.');
+            this.reset();
+        });
+
+        // Tracking Status Updates
+        document.querySelector('.track-btn').addEventListener('click', function() {
+            const trackingNumber = document.querySelector('input[type="text"]').value;
+            if(trackingNumber) {
+                alert(`Tracking details for ${trackingNumber} will be available soon!`);
+            }
+        });
+    </script>
+</body>
+</html>
